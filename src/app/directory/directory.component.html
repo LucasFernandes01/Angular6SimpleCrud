@@ -1,0 +1,36 @@
+<h2>Listing</h2>
+<ul id="ninja-listing">
+  <form id="filter">
+    <label>Filter by name:</label>
+    <input type="text" [(ngModel)]="searchTerm" name="searchTerm"/>
+  </form>
+  <li *ngFor="let ninja of ninjas | filter: searchTerm" class="no-bullets">
+    <div class="single-ninja">
+      <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
+      <h3>{{ninja.name}}</h3>
+      <i class="fas fa-trash-alt"
+       id="trash-hover"
+       (click)="removeData(ninja.$key)" 
+      ></i>
+    </div>
+  </li>
+</ul>
+
+<form id="add-ninja" #ninjaForm="ngForm" (ngSubmit)="onSubmit(ninjaForm)">
+  <input 
+    type="text"
+    [(ngModel)] ="name"
+    placeholder="Ninja name"
+    name="name"
+    required
+  >
+
+  <input
+    type="text"
+    [(ngModel)] ="belt"
+    placeholder="Belt color"
+    name="belt"
+    required
+  >
+  <button type="submit">ADD NINJA</button>
+</form>
